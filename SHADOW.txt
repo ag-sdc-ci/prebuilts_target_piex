@@ -1,6 +1,7 @@
-shadow prebuilt repo: piex (target)
+shadow prebuilt repo: piex (target + host dual slice)
   upstream: external/piex
-  api-level: 32 (branch 32-20261016)
-  blobs: org.blisslabs.ag.piex.apex org.blisslabs.ag.piex.dev.apex org.blisslabs.ag.piex.doc.apex
-  dev-src: extracted dev payload + headers + root Android.bp
+  api-level: 34 (branch 34-20261016)
+  blobs: org.blisslabs.ag.piex.apex
+  dev-src: dual-slice extractive payload (target/ bionic, host/ glibc, include/) + root Android.bp
+  modules: libbinary_parse, libimage_type_recognition, libtiff_directory, libpiex, piex_default_cflags
   date: 2026-10-16

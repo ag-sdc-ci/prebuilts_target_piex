@@ -1,3 +1,6 @@
+// Auto-generated prebuilt Blueprint for external/piex
+// Dual-slice extractive shadow (target bionic + host glibc)
+
 package {
     default_applicable_licenses: ["external_piex_license"],
 }
@@ -13,20 +16,6 @@ license {
     ],
 }
 
-prebuilt_apex {
-    name: "org.blisslabs.ag.piex",
-    apex_name: "org.blisslabs.ag.piex",
-    source_apex_name: "org.blisslabs.ag.piex",
-    arch: {
-        x86_64: {
-            src: "org.blisslabs.ag.piex.apex",
-        },
-    },
-    filename: "org.blisslabs.ag.piex.apex",
-    prefer: true,
-    installable: true,
-}
-
 cc_defaults {
     name: "piex_default_cflags",
     cflags: ["-Wall", "-Werror", "-Wsign-compare"],
@@ -38,8 +27,15 @@ cc_prebuilt_library_static {
     vendor_available: true,
     product_available: true,
     recovery_available: true,
-    export_include_dirs: ["dev-src"],
-    srcs: ["dev-src/lib/libbinary_parse.a"],
+    export_include_dirs: ["include"],
+    target: {
+        host: {
+            srcs: ["host/lib64/libbinary_parse.a"],
+        },
+        android: {
+            srcs: ["target/lib64/libbinary_parse.a"],
+        },
+    },
 }
 
 cc_prebuilt_library_static {
@@ -48,8 +44,15 @@ cc_prebuilt_library_static {
     vendor_available: true,
     product_available: true,
     recovery_available: true,
-    export_include_dirs: ["dev-src"],
-    srcs: ["dev-src/lib/libimage_type_recognition.a"],
+    export_include_dirs: ["include"],
+    target: {
+        host: {
+            srcs: ["host/lib64/libimage_type_recognition.a"],
+        },
+        android: {
+            srcs: ["target/lib64/libimage_type_recognition.a"],
+        },
+    },
 }
 
 cc_prebuilt_library_static {
@@ -58,8 +61,15 @@ cc_prebuilt_library_static {
     vendor_available: true,
     product_available: true,
     recovery_available: true,
-    export_include_dirs: ["dev-src"],
-    srcs: ["dev-src/lib/libtiff_directory.a"],
+    export_include_dirs: ["include"],
+    target: {
+        host: {
+            srcs: ["host/lib64/libtiff_directory.a"],
+        },
+        android: {
+            srcs: ["target/lib64/libtiff_directory.a"],
+        },
+    },
 }
 
 cc_prebuilt_library {
@@ -68,11 +78,15 @@ cc_prebuilt_library {
     vendor_available: true,
     product_available: true,
     recovery_available: true,
-    export_include_dirs: ["dev-src"],
-    shared: {
-        srcs: ["src/lib/libpiex.so"],
-    },
-    static: {
-        srcs: ["dev-src/lib/libpiex.a"],
+    export_include_dirs: ["include"],
+    target: {
+        host: {
+            shared: { srcs: ["host/lib64/libpiex.so"] },
+            static: { srcs: ["host/lib64/libpiex.a"] },
+        },
+        android: {
+            shared: { srcs: ["target/lib64/libpiex.so"] },
+            static: { srcs: ["target/lib64/libpiex.a"] },
+        },
     },
 }
