@@ -1,0 +1,78 @@
+package {
+    default_applicable_licenses: ["external_piex_license"],
+}
+
+license {
+    name: "external_piex_license",
+    visibility: [":__subpackages__"],
+    license_kinds: [
+        "SPDX-license-identifier-Apache-2.0",
+    ],
+    license_text: [
+        "LICENSE",
+    ],
+}
+
+prebuilt_apex {
+    name: "org.blisslabs.ag.piex",
+    apex_name: "org.blisslabs.ag.piex",
+    source_apex_name: "org.blisslabs.ag.piex",
+    arch: {
+        x86_64: {
+            src: "org.blisslabs.ag.piex.apex",
+        },
+    },
+    filename: "org.blisslabs.ag.piex.apex",
+    prefer: true,
+    installable: true,
+}
+
+cc_defaults {
+    name: "piex_default_cflags",
+    cflags: ["-Wall", "-Werror", "-Wsign-compare"],
+}
+
+cc_prebuilt_library_static {
+    name: "libbinary_parse",
+    host_supported: true,
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    export_include_dirs: ["dev-src"],
+    srcs: ["dev-src/lib/libbinary_parse.a"],
+}
+
+cc_prebuilt_library_static {
+    name: "libimage_type_recognition",
+    host_supported: true,
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    export_include_dirs: ["dev-src"],
+    srcs: ["dev-src/lib/libimage_type_recognition.a"],
+}
+
+cc_prebuilt_library_static {
+    name: "libtiff_directory",
+    host_supported: true,
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    export_include_dirs: ["dev-src"],
+    srcs: ["dev-src/lib/libtiff_directory.a"],
+}
+
+cc_prebuilt_library {
+    name: "libpiex",
+    host_supported: true,
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    export_include_dirs: ["dev-src"],
+    shared: {
+        srcs: ["src/lib/libpiex.so"],
+    },
+    static: {
+        srcs: ["dev-src/lib/libpiex.a"],
+    },
+}
